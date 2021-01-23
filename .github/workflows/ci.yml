@@ -43,5 +43,5 @@ jobs:
           COVERAGE: ${{ matrix.coverage }}
 
       - name: Upload coverage
-        if: matrix.coverage == "true"
+        if: matrix.coverage == 'true'
         uses: codecov/codecov-action@v1

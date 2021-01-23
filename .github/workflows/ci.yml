@@ -21,11 +21,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Conda Environment
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@e23d871804685e8c52189e5bd45e9145019f10af
         with:
-          miniconda-version: "latest"
-          mamba-version: "*"
-          channels: conda-forge,defaults
+          miniforge-version: "latest"
+          miniforge-variant: Mambaforge
           python-version: ${{ matrix.python-version }}
           environment-file: continuous_integration/environment-${{ matrix.python-version }}.yaml
           activate-environment: test-environment

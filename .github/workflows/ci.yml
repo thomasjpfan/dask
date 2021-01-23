@@ -10,11 +10,14 @@ jobs:
       matrix:
         os: ["windows-latest", "ubuntu-latest", "macos-latest"]
         python-version: ["3.6", "3.7", "3.8"]
+        include:
+          - os: "ubuntu-latest"
+            python-version: "3.8"
+            coverage: "true"
 
     env:
       PYTHON_VERSION: ${{ matrix.python-version }}
       PARALLEL: "true"
-      COVERAGE: "true"
 
     steps:
       - name: Checkout source
@@ -36,7 +39,9 @@ jobs:
       - name: Run tests
         shell: bash -l {0}
         run: source continuous_integration/scripts/run_tests.sh
+        env:
+          COVERAGE: ${{ matrix.coverage }}
 
       - name: Upload coverage
-        if: matrix.os == 'ubuntu-latest' &&  matrix.python-version == '3.8'
+        if: matrix.coverage == "true"
         uses: codecov/codecov-action@v1
